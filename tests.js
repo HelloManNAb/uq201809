@@ -1,0 +1,21 @@
+var a = require("assert");
+var lib = require("./algorithm.js");
+
+a.throws(()=>lib.algorithm());
+a.throws(()=>lib.algorithm(NaN));
+a.throws(()=>lib.algorithm(["a"]));
+a.throws(()=>lib.algorithm([[2]]));
+a.throws(()=>lib.algorithm([[-2,2]]));
+a.throws(()=>lib.algorithm([[2,-2]]));
+a.throws(()=>lib.algorithm([[2,2.5]]));
+a.deepEqual(lib.algorithm([]), []);
+a.deepEqual(lib.algorithm([[2,2]]), [[1,2]]);
+a.deepEqual(lib.algorithm([[400000,60, "auto"], [8000,12, "mobil"], [30000,10, "dovolena"]]), [[7300,60]]);
+a.deepEqual(lib.algorithm([[60000,12, "notebook"], [9000,24, "mobil"]]), [[5000,12], [750, 12]]);
+a.deepEqual(lib.algorithm([[400000, 13], [600000, 3], [300000, 1]]), [[300000,3], [40000, 10]]);
+a.deepEqual(lib.algorithm([[3000000, 13], [600000, 3], [300000, 1]]), [[300000,13]]);
+a.deepEqual(lib.algorithm([[60000,12, "notebook"], [9000,24, "mobil"], [12, 12, "bug"]]), [[5001,12], [750, 12]]);
+a.deepEqual(lib.algorithm([[60000,12, "notebook"], [9000,24, "mobil"], [120000, 12, "bug"], [120000, 12, "bug"]]), [[25000,12], [750,12]]);
+a.deepEqual(lib.algorithm([[1,1], [10,2], [10, 2], [2, 3]]), [[10.5,2], [2,1]]);
+a.deepEqual(lib.algorithm([[11,1], [2,2], [3, 3], [1, 1]]), [[12,1], [2.5,2]]);
+a.deepEqual(lib.algorithm([["11",1], ["2",2], [3, 3], [1, 1]]), [[12,1], [2.5,2]]);
